@@ -5,7 +5,7 @@ using TestTask1.Models;
 namespace TestTask1.Controllers
 {
     /// <summary>
-    /// Представляет API для работы с рекламными площадками..
+    /// Представляет API для работы с рекламными площадками.
     /// </summary>
     [ApiController]
     [Route("[controller]")]
@@ -16,18 +16,18 @@ namespace TestTask1.Controllers
         /// <summary>
         /// Инициализирует экземпляр класса <see cref="PlatformsController"/>.
         /// </summary>
-        /// <param name="root">Экземпляр сервиса по работе с платформами.</param>
+        /// <param name="root">Экземпляр сервиса по работе с площадками.</param>
         public PlatformsController(Platform root)
         {
             this.root = root;
         }
 
         /// <summary>
-        /// Получает список платформ по указанной локации.
+        /// Получает список площадок по указанной локации.
         /// </summary>
         /// <param name="path">Локация в формате '/path1/.../pathN'.</param>
-        /// <returns>Возвращает результат запроса <see cref="IActionResult"/>, а так же список платформ <see cref="IEnumerable{Platform}"/>.</returns>
-        /// <response code="200">Успешное возвращение платформ.</response>
+        /// <returns>Возвращает результат запроса <see cref="IActionResult"/>, а так же список площадок <see cref="IEnumerable{Platform}"/>.</returns>
+        /// <response code="200">Успешное возвращение площадок.</response>
         /// <response code="400">Неверный формат локации.</response>
         /// <response code="404">Нет подходящих под запрос вариантов.</response>
         [HttpGet(Name = "Get")]
@@ -48,7 +48,7 @@ namespace TestTask1.Controllers
         }
 
         /// <summary>
-        /// Загружает данные о платформах из форматированного .txt файла.
+        /// Загружает данные о площадок из форматированного .txt файла.
         /// Любая попытка загрузить файл очищает память от ранее загруженных данных.
         /// </summary>
         /// <param name="file">Файл с данными.</param>

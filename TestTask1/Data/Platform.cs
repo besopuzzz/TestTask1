@@ -1,22 +1,22 @@
 ﻿namespace TestTask1.Data
 {
     /// <summary>
-    /// Представляет класс рекламных площадок, которые имеет вложении площадки в виде иерархии.
+    /// Представляет класс рекламных площадок, который имеет вложенные площадки в виде иерархии.
     /// </summary>
     public sealed class Platform
     {
         /// <summary>
-        /// Получает наименование платформы, расположенную на этой <see cref="Location"/> локации.
+        /// Получает или задает наименование площадки, расположенную на этой <see cref="Location"/> локации.
         /// </summary>
         public string Name { get; set; }
 
         /// <summary>
-        /// Получает префикс локации относительно родительской платформы.
+        /// Получает префикс локации относительно родительской площадки.
         /// </summary>
         public string Prefix => prefix;
 
         /// <summary>
-        /// Получает локацию платформы.
+        /// Получает локацию площадки.
         /// </summary>
         public string Location
         {
@@ -27,9 +27,9 @@
         }
 
         /// <summary>
-        /// Возвращает первую найденную вложенную платформу.
+        /// Возвращает первую найденную вложенную площадку.
         /// </summary>
-        /// <param name="prefix">Префикс вложенной платформы.</param>
+        /// <param name="prefix">Префикс вложенной площадки.</param>
         /// <returns></returns>
         /// <exception cref="PrefixFormatException"></exception>
         public Platform? this[string prefix]
@@ -45,7 +45,7 @@
         }
 
         /// <summary>
-        /// Возвращает коллекцию всех вложенных платформ.
+        /// Возвращает коллекцию всех вложенных площадок.
         /// </summary>
         public IReadOnlyCollection<Platform> Platforms => childs.Values;
 
@@ -76,9 +76,9 @@
         }
 
         /// <summary>
-        /// Добавляет вложенную платформу.
+        /// Добавляет вложенную площадку.
         /// </summary>
-        /// <param name="child">Экземпляр вложенной платформы.</param>
+        /// <param name="child">Экземпляр вложенной площадки.</param>
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="ArgumentException"></exception>
         public void Add(Platform child)
@@ -106,10 +106,10 @@
         }
 
         /// <summary>
-        /// Получает вложенную платформу или создает ее.
+        /// Получает вложенную площадку или создает ее.
         /// </summary>
         /// <param name="prefix">Префикс локации.</param>
-        /// <returns>Найденная или созданная вложенная платформа.</returns>
+        /// <returns>Найденная или созданная вложенная площадка.</returns>
         /// <exception cref="PrefixFormatException"></exception>
         public Platform GetOrAdd(string prefix)
         {
@@ -128,9 +128,9 @@
         }
 
         /// <summary>
-        /// Удаляет вложенную платформу.
+        /// Удаляет вложенную площадку.
         /// </summary>
-        /// <param name="child">Экземпляр вложенной платформы.</param>
+        /// <param name="child">Экземпляр вложенной площадки.</param>
         /// <exception cref="ArgumentNullException"></exception>
         public void Remove(Platform child)
         {
@@ -140,9 +140,9 @@
         }
 
         /// <summary>
-        /// Удаляет вложенную платформу, найденную по префиксу.
+        /// Удаляет вложенную площадку, найденную по префиксу.
         /// </summary>
-        /// <param name="prefix">Префикс, по которому ищет платформы.</param>
+        /// <param name="prefix">Префикс площадки, которую надо удалить.</param>
         /// <exception cref="ArgumentNullException"></exception>
         public void Remove(string prefix)
         {
@@ -150,7 +150,7 @@
         }
 
         /// <summary>
-        /// Удаляет все вложенные платформы.
+        /// Удаляет все вложенные площадки.
         /// </summary>
         public void Clear()
         {
@@ -158,10 +158,10 @@
         }
 
         /// <summary>
-        /// Выполняет поиск платформ с учетом вложенных локаций. 
+        /// Выполняет поиск площадок с учетом вложенных локаций. 
         /// </summary>
         /// <param name="location">Локация искомых площадок.</param>
-        /// <returns>Коллекция найденных платформ <see cref="IEnumerable{T}"/>.</returns>
+        /// <returns>Коллекция найденных площадок <see cref="IEnumerable{T}"/>.</returns>
         public IEnumerable<Platform> FindPlatforms(string location)
         {
             PrefixFormatException.ThrowIfNotValid(location);
@@ -189,7 +189,7 @@
         }
 
         /// <summary>
-        /// Разбирает вводные данные и выстраивает иерархию.
+        /// Разбирает вводные данные и выстраивает иерархию площадок.
         /// </summary>
         /// <param name="txt">Данные .txt файла.</param>
         public void Parse(string txt)
@@ -228,12 +228,12 @@
         }
 
         /// <summary>
-        /// Разбирает локацию на префиксы и создает вложенные платформы.
-        /// В случае, когда в пути есть префиксы неизвестных платформ, для них будет создана платформа без наименования <see cref="Platform.Name"/>.
+        /// Разбирает локацию на префиксы и создает вложенные площадки.
+        /// В случае, когда в пути есть префиксы неизвестных площадок, для них будет создана площадка без наименования <see cref="Platform.Name"/>.
         /// </summary>
-        /// <param name="parent">Экземпляр платформы, для которой создаем вложенные платформы.</param>
+        /// <param name="parent">Экземпляр площадки, для которой создаем вложенные площадки.</param>
         /// <param name="location">Локация, которое необходимо разобрать на префиксы.</param>
-        /// <param name="platform">Наименование платформы, для которой разбираем локацию.</param>
+        /// <param name="platform">Наименование площадки, для которой разбираем локацию.</param>
         private static void Parse(Platform parent, ref string location, string platform)
         {
             var prefix = PrefixHelper.CutAndGetFirstPrefix(ref location);
