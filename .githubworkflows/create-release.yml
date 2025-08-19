@@ -1,0 +1,65 @@
+name: Create and publish a Release
+
+# 1. Запускаем workflow вручную из интерфейса GitHub
+# Также можно настроить автоматический запуск, например, при push в ветку main:
+# on:
+#   push:
+#     branches: [ main ]
+on:
+  workflow_dispatch
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest # Используем последний Ubuntu runner
+
+    steps:
+    # 2. Клонируем наш репозиторий
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    # 3. Устанавливаем .NET (Укажите вашу версию!)
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '9.0.x' # ИЗМЕНИТЕ на вашу версию .NET (7.0.x, 6.0.x)
+
+    # 4. Восстанавливаем зависимости (опционально, но хорошая практика)
+    - name: Restore dependencies
+      run: dotnet restore
+
+    # 5. Собираем проект в папку (ТУТ САМОЕ ВАЖНОЕ!)
+    - name: Publish to folder
+      run: dotnet publish -c Release -o ./publish-output --nologo
+      # Эта команда делает то же, что и вы делали вручную в VS.
+      # Она создаст папку `publish-output` со всеми готовыми файлами.
+
+    # 6. Создаем архив (zip) из содержимого папки публикации
+    - name: Create ZIP artifact
+      run: |
+        cd ./publish-output
+        zip -r ../release.zip ./*
+        cd ..
+
+    # 7. Создаем новый релиз на GitHub, используя наш секрет
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }} # Используем наш секрет
+      with:
+        tag_name: v1.0.${{ github.run_number }} # Автоматическая нумерация тегов (v1.0.1, v1.0.2...)
+        release_name: Release v1.0.${{ github.run_number }}
+        draft: false
+        prerelease: false
+
+    # 8. Загружаем созданный ZIP-архив в качестве asset для созданного релиза
+    - name: Upload Release Asset
+      id: upload-release-asset
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }} # Ссылка из предыдущего шага
+        asset_path: ./release.zip
+        asset_name: MyWebApi-v1.0.${{ github.run_number }}.zip # Имя файла в релизе
+        asset_content_type: application/zip
