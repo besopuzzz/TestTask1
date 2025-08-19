@@ -61,5 +61,5 @@ jobs:
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }} # Ссылка из предыдущего шага
         asset_path: ./release.zip
-        asset_name: MyWebApi-v1.0.${{ github.run_number }}.zip # Имя файла в релизе
+        asset_name: PlatformsAPI-v1.0.${{ github.run_number }}.zip # Имя файла в релизе
         asset_content_type: application/zip
