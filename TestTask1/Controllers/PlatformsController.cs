@@ -1,11 +1,11 @@
-using Microsoft.AspNetCore.Mvc;
+п»їusing Microsoft.AspNetCore.Mvc;
 using TestTask1.Data;
 using TestTask1.Models;
 
 namespace TestTask1.Controllers
 {
     /// <summary>
-    /// Представляет API для работы с рекламными площадками.
+    /// РџСЂРµРґСЃС‚Р°РІР»СЏРµС‚ API РґР»СЏ СЂР°Р±РѕС‚С‹ СЃ СЂРµРєР»Р°РјРЅС‹РјРё РїР»РѕС‰Р°РґРєР°РјРё..
     /// </summary>
     [ApiController]
     [Route("[controller]")]
@@ -14,22 +14,22 @@ namespace TestTask1.Controllers
         private readonly Platform root;
 
         /// <summary>
-        /// Инициализирует экземпляр класса <see cref="PlatformsController"/>.
+        /// РРЅРёС†РёР°Р»РёР·РёСЂСѓРµС‚ СЌРєР·РµРјРїР»СЏСЂ РєР»Р°СЃСЃР° <see cref="PlatformsController"/>.
         /// </summary>
-        /// <param name="root">Экземпляр сервиса по работе с платформами.</param>
+        /// <param name="root">Р­РєР·РµРјРїР»СЏСЂ СЃРµСЂРІРёСЃР° РїРѕ СЂР°Р±РѕС‚Рµ СЃ РїР»Р°С‚С„РѕСЂРјР°РјРё.</param>
         public PlatformsController(Platform root)
         {
             this.root = root;
         }
 
         /// <summary>
-        /// Получает список платформ по указанной локации.
+        /// РџРѕР»СѓС‡Р°РµС‚ СЃРїРёСЃРѕРє РїР»Р°С‚С„РѕСЂРј РїРѕ СѓРєР°Р·Р°РЅРЅРѕР№ Р»РѕРєР°С†РёРё.
         /// </summary>
-        /// <param name="path">Локация в формате '/path1/.../pathN'.</param>
-        /// <returns>Возвращает результат запроса <see cref="IActionResult"/>, а так же список платформ <see cref="IEnumerable{Platform}"/>.</returns>
-        /// <response code="200">Успешное возвращение платформ.</response>
-        /// <response code="400">Неверный формат локации.</response>
-        /// <response code="404">Нет подходящих под запрос вариантов.</response>
+        /// <param name="path">Р›РѕРєР°С†РёСЏ РІ С„РѕСЂРјР°С‚Рµ '/path1/.../pathN'.</param>
+        /// <returns>Р’РѕР·РІСЂР°С‰Р°РµС‚ СЂРµР·СѓР»СЊС‚Р°С‚ Р·Р°РїСЂРѕСЃР° <see cref="IActionResult"/>, Р° С‚Р°Рє Р¶Рµ СЃРїРёСЃРѕРє РїР»Р°С‚С„РѕСЂРј <see cref="IEnumerable{Platform}"/>.</returns>
+        /// <response code="200">РЈСЃРїРµС€РЅРѕРµ РІРѕР·РІСЂР°С‰РµРЅРёРµ РїР»Р°С‚С„РѕСЂРј.</response>
+        /// <response code="400">РќРµРІРµСЂРЅС‹Р№ С„РѕСЂРјР°С‚ Р»РѕРєР°С†РёРё.</response>
+        /// <response code="404">РќРµС‚ РїРѕРґС…РѕРґСЏС‰РёС… РїРѕРґ Р·Р°РїСЂРѕСЃ РІР°СЂРёР°РЅС‚РѕРІ.</response>
         [HttpGet(Name = "Get")]
         public IActionResult Get([FromQuery] string path)
         {
@@ -48,13 +48,13 @@ namespace TestTask1.Controllers
         }
 
         /// <summary>
-        /// Загружает данные о платформах из форматированного .txt файла.
-        /// Любая попытка загрузить файл очищает память от ранее загруженных данных.
+        /// Р—Р°РіСЂСѓР¶Р°РµС‚ РґР°РЅРЅС‹Рµ Рѕ РїР»Р°С‚С„РѕСЂРјР°С… РёР· С„РѕСЂРјР°С‚РёСЂРѕРІР°РЅРЅРѕРіРѕ .txt С„Р°Р№Р»Р°.
+        /// Р›СЋР±Р°СЏ РїРѕРїС‹С‚РєР° Р·Р°РіСЂСѓР·РёС‚СЊ С„Р°Р№Р» РѕС‡РёС‰Р°РµС‚ РїР°РјСЏС‚СЊ РѕС‚ СЂР°РЅРµРµ Р·Р°РіСЂСѓР¶РµРЅРЅС‹С… РґР°РЅРЅС‹С….
         /// </summary>
-        /// <param name="file">Файл с данными.</param>
-        /// <returns>Возвращает результат запроса <see cref="IActionResult"/>, а так же результат обработки файла <see cref="UploadResult"/>.</returns>
-        /// <response code="200">Успешная загрузка и обработка файла.</response>
-        /// <response code="400">Неверный формат файла.</response>
+        /// <param name="file">Р¤Р°Р№Р» СЃ РґР°РЅРЅС‹РјРё.</param>
+        /// <returns>Р’РѕР·РІСЂР°С‰Р°РµС‚ СЂРµР·СѓР»СЊС‚Р°С‚ Р·Р°РїСЂРѕСЃР° <see cref="IActionResult"/>, Р° С‚Р°Рє Р¶Рµ СЂРµР·СѓР»СЊС‚Р°С‚ РѕР±СЂР°Р±РѕС‚РєРё С„Р°Р№Р»Р° <see cref="UploadResult"/>.</returns>
+        /// <response code="200">РЈСЃРїРµС€РЅР°СЏ Р·Р°РіСЂСѓР·РєР° Рё РѕР±СЂР°Р±РѕС‚РєР° С„Р°Р№Р»Р°.</response>
+        /// <response code="400">РќРµРІРµСЂРЅС‹Р№ С„РѕСЂРјР°С‚ С„Р°Р№Р»Р°.</response>
         [HttpPost(Name = "Upload")]
         public async Task<IActionResult> Upload([FromForm] UploadFileModel file)
         {
@@ -65,7 +65,7 @@ namespace TestTask1.Controllers
             try
             {
                 if (file.File == null)
-                    throw new Exception("Не указан файл.");
+                    throw new Exception("РќРµ СѓРєР°Р·Р°РЅ С„Р°Р№Р».");
 
                 using (var sr = new StreamReader(file.File.OpenReadStream()))
                 {
@@ -80,7 +80,7 @@ namespace TestTask1.Controllers
             {
                 var errors = result.Errors;
 
-                errors.Add("Во время загрузки файла произошла ошибка.");
+                errors.Add("Р’Рѕ РІСЂРµРјСЏ Р·Р°РіСЂСѓР·РєРё С„Р°Р№Р»Р° РїСЂРѕРёР·РѕС€Р»Р° РѕС€РёР±РєР°.");
 
                 errors.Add(ex.Message);
 
