@@ -5,7 +5,7 @@ using TestTask1.Models;
 namespace TestTask1.Controllers
 {
     /// <summary>
-    /// ѕредставл€ет API дл€ работы с рекламными площадками
+    /// ѕредставл€ет API дл€ работы с рекламными площадками.
     /// </summary>
     [ApiController]
     [Route("[controller]")]
