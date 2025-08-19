@@ -25,7 +25,7 @@ namespace TestTask1.Controllers
         /// <summary>
         /// Получает список площадок по указанной локации.
         /// </summary>
-        /// <param name="path">Локация в формате '/path1/.../pathN'.</param>
+        /// <param name="path">Локация в формате '/path1.../pathN'.</param>
         /// <returns>Возвращает результат запроса <see cref="IActionResult"/>, а так же список площадок <see cref="IEnumerable{Platform}"/>.</returns>
         /// <response code="200">Успешное возвращение площадок.</response>
         /// <response code="400">Неверный формат локации.</response>
