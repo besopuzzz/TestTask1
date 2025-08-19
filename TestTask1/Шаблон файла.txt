@@ -1,0 +1,10 @@
+﻿Яндекс.Директ:/ru
+Крутая реклама:/ru/svrd
+Ревдинский рабочий:/ru/svrd/revda,/ru/svrd/pervik
+Завлекает и точка:/ru/svrd/revda/zavitoch,/ru/svrd/pervik/zavitoch
+Газета уральских москвичей:/ru/msk,/ru/permobl,/ru/chelobl
+Чеканая монета:/ru/velen,/ru/velen/krivtopi
+Древние свитки:/es
+Скайрим для нордов:/es/skyrim
+Моровинд:/es/morovind
+Эльфы и деньги:/es/skyrim/elf,/ru/velen/elf,/ru/svrd/pervik/zavitoch/elf
